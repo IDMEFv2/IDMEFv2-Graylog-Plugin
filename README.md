@@ -16,7 +16,7 @@ The IDMEFv2 Alert Plugin for Graylog automatically sends alert notifications in 
 
 ### Download and Install
 
-1. [Download the plugin JAR file](https://github.com/IDMEFv2/idmefv2-alert-plugin/releases) from the releases page
+1. [Download the plugin JAR file](https://github.com/IDMEFv2/IDMEFv2-Graylog-Plugin/releases) from the releases page
 2. Place the `.jar` file in your Graylog plugin directory
 3. The default plugin directory is `plugins/` relative to your `graylog-server` directory
 4. You can also configure a custom plugin directory in your `graylog.conf` file:
@@ -34,8 +34,8 @@ If you want to build the plugin yourself:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/IDMEFv2/idmefv2-alert-plugin.git
-   cd idmefv2-alert-plugin
+   git clone https://github.com/IDMEFv2/IDMEFv2-Graylog-Plugin.git
+   cd IDMEFv2-Graylog-Plugin
    ```
 
 2. Build the plugin:
@@ -43,7 +43,7 @@ If you want to build the plugin yourself:
    mvn package
    ```
 
-You may need to install maven 
+You may need to install maven
 
    ```bash
    sudo apt install maven
@@ -306,7 +306,7 @@ cd /path/to/your/workspace
 # Bootstrap using the manifest from this repo (pass an absolute path)
 graylog-project bootstrap \
   github://Graylog2/graylog-project.git \
-  --manifest /absolute/path/to/graylog-plugin-idmefv2-alert/dev/graylog-project-manifest.json \
+  --manifest /absolute/path/to/IDMEFv2-Graylog-Plugin/dev/graylog-project-manifest.json \
   --force-https-repos
 ```
 
@@ -403,7 +403,7 @@ This project is licensed under the Server Side Public License - see the LICENSE 
 ## Support
 
 For support and questions:
-- [GitHub Issues](https://github.com/IDMEFv2/idmefv2-alert-plugin/issues)
+- [GitHub Issues](https://github.com/IDMEFv2/IDMEFv2-Graylog-Plugin/issues)
 - [IDMEFv2 Documentation](https://github.com/IDMEFv2/IDMEFv2-Drafts-IETF)
 
 ## Plugin Release

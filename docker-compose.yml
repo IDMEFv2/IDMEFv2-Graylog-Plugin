@@ -1,0 +1,49 @@
+services:
+  mongodb:
+    image: mongo:7
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  opensearch:
+    image: opensearchproject/opensearch:2
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=Admin@OpenSearch1!
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+    restart: unless-stopped
+
+  graylog:
+    image: graylog/graylog:7.1
+    environment:
+      # Change these two values in production
+      GRAYLOG_PASSWORD_SECRET: "somepasswordsecret16chars"
+      # Default: admin / admin  (echo -n admin | sha256sum)
+      GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+      GRAYLOG_HTTP_EXTERNAL_URI: "http://127.0.0.1:9000/"
+      GRAYLOG_MONGODB_URI: "mongodb://mongodb:27017/graylog"
+      GRAYLOG_ELASTICSEARCH_HOSTS: "http://opensearch:9200"
+    volumes:
+      # Mount the plugin JAR — rebuild with `mvn package -Dskip.web.build=true` then restart
+      - ./target/graylog-plugin-idmefv2-alert-1.0.0-SNAPSHOT.jar:/usr/share/graylog/plugin/graylog-plugin-idmefv2-alert.jar:ro
+    ports:
+      - "9000:9000"   # Web UI
+      - "5044:5044"   # Beats input (optional)
+      - "5140:5140"   # Syslog UDP (optional)
+      - "12201:12201/udp" # GELF UDP (optional)
+    depends_on:
+      - mongodb
+      - opensearch
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+  opensearch_data:

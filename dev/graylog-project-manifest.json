@@ -1,0 +1,19 @@
+{
+  "modules": [
+    {
+      "repository": "https://github.com/Graylog2/graylog2-server.git",
+      "revision": "master",
+      "server": true,
+      "submodules": [
+        { "path": "graylog2-server" },
+        { "path": "graylog2-web-interface" },
+        { "path": "graylog-storage-elasticsearch7" },
+        { "path": "graylog-storage-opensearch2" }
+      ]
+    },
+    {
+      "repository": "https://github.com/IDMEFv2/idmefv2-alert-plugin.git",
+      "revision": "main"
+    }
+  ]
+}

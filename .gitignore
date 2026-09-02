@@ -1,0 +1,6 @@
+node_modules/
+.mvn/
+.vscode
+.idea
+.claude/settings.local.json
+
